@@ -1,9 +1,10 @@
 # golearn
 
-- reverseList.go  
-- informativeAbstract.go  
-- kalmanfilter.go  
+## Done
+- reverseList.go
+- informativeAbstract.go
+- kalmanfilter.go
 
-## TODO:  
-- debug with GDB  
-
+## TODO
+- design TinyURL
+- debug with GDB

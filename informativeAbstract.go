@@ -3,6 +3,7 @@ package main
 
 import (
   "fmt"
+  "flag"
   "crypto/md5"
   "crypto/sha1"
   "crypto/sha256"
@@ -10,9 +11,19 @@ import (
   "hash"
 )
 
+var (
+  msg string
+  t string = ""
+)
+
+func init() {
+  flag.StringVar(&msg, "msg", "", "msg:string")
+  flag.StringVar(&t, "t", "MD5", "t:string")
+  flag.Parse()
+}
 
 func main() {
-  funcNameList := []string{"MD5", "SHA1", "SHA224", "SHA256", "SHA384", "SHA512"}
+  // funcNameList := []string{"MD5", "SHA1", "SHA224", "SHA256", "SHA384", "SHA512"}
   funcMap := map[string]func(msg []byte) string{
     "MD5"     : func(msg []byte) string{var h hash.Hash = md5.New();h.Write(msg);return string(h.Sum(nil))},
     "SHA1"    : func(msg []byte) string{var h hash.Hash = sha1.New();h.Write(msg);return string(h.Sum(nil))},
@@ -21,10 +32,11 @@ func main() {
     "SHA384"  : func(msg []byte) string{var h hash.Hash = sha512.New384();h.Write(msg);return string(h.Sum(nil))},
     "SHA512"  : func(msg []byte) string{var h hash.Hash = sha512.New();h.Write(msg);return string(h.Sum(nil))},
   }
-  var msg1 string
-  fmt.Printf("Input string : ")
-  fmt.Scanf("%s", &msg1)
-  for _,funcName := range funcNameList{
-    fmt.Printf("%s \t: %x\n", funcName, funcMap[funcName]([]byte(msg1)))
-  }
+  // var msg1 string
+  // fmt.Printf("Input string : ")
+  // fmt.Scanf("%s", &msg1)
+  // for _,funcName := range funcNameList{
+  //   fmt.Printf("%s \t: %x\n", funcName, funcMap[funcName]([]byte(msg1)))
+  // }
+  fmt.Printf("%x\n", funcMap[t]([]byte(msg)))
 }

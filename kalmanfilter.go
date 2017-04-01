@@ -1,3 +1,5 @@
+// https://en.m.wikipedia.org/wiki/Kalman_filter
+
 package main
 
 import (
@@ -77,8 +79,8 @@ func (filterData *FilterData) Update(stateReading, deltaReading, deltaTime float
 
 func main() {
   myFilterData := FilterData {
-    State     : 0,
-    Bias      : 1,
+    State     : 1,
+    Bias      : 0,
     QAngle    : 1,
     QBias     : 1,
     RMeasure  : 1,
@@ -86,10 +88,10 @@ func main() {
 
   tmp := 0.0;
   duration := 1.0;
-  for i := 0.0; i < 30; i++ {
+  for i := 0.0; i < 20; i++ {
     fmt.Println(tmp, i)
     // newState := myFilterData.Update(i, tmp, duration)
-    newState := myFilterData.Update(i, tmp - i, duration)
+    newState := myFilterData.Update(tmp, tmp-i, duration)
     tmp = newState 
   }
 
